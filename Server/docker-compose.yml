@@ -14,7 +14,7 @@ services:
         registry_external_url 'https://gitlab.domain.local:5050'
         gitlab_rails['registry_enabled'] = true
     ports:
-      - '8080:80'
+      # - '8080:80'
       - '8443:8443'
       - '8822:22'
       - '5050:5050'
