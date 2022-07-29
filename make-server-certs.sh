@@ -1,7 +1,6 @@
 domain="domain.local"
 localCertDir="/home/toor/GitLab/certificates"
 server1="gitlab"
-server2="gitlab-runner"
 gitlabRunnerCertPath="/var/lib/docker/volumes/gitlab_gitlab-runner-config/_data/certs"
 gitlabCertPath="/var/lib/docker/volumes/gitlab_gitlab-config/_data/ssl"
 

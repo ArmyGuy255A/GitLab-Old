@@ -5,18 +5,19 @@ services:
     restart: "no"
     environment:
       - GIT_SSL_NO_VERIFY=1
+      - GIT_SSH_COMMAND="ssh -oPort=8443"
     depends_on:
       - gitlab
     volumes:
       - gitlab-runner-config:/etc/gitlab-runner
       - gitlab-runner-home:/home/gitlab-runner
-      # - /home/toor/GitLab/gitlab-runner-config:/etc/gitlab-runner
-      - gitlab-runner-sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
       - docker-machine-config:/root/.docker/machine
     ports:
       - 8093:8093
     networks:
       - gitlab
+    # command: ["register", "--non-interactive", "--url", "https://gitlab.domain.local:8443", "--registration-token", "jk9ArzYVovwD513pjFpv", "--executor", "docker" , "--docker-image", "ubuntu:latest", "--tag-list", "docker,aws", "--name", "runner-1"]
 volumes:
   docker-machine-config:
   gitlab-runner-config:

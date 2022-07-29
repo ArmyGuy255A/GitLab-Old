@@ -7,7 +7,7 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         # Add any other gitlab.rb configuration here, each on its own line
-        external_url 'https://gitlab.domain.local'
+        external_url 'https://gitlab.domain.local:8443'
         gitlab_rails['gitlab_shell_ssh_port'] = 8822
         gitlab_rails['initial_root_password'] = "password"
         gitlab_rails['store_initial_root_password'] = true
@@ -15,7 +15,7 @@ services:
         gitlab_rails['registry_enabled'] = true
     ports:
       - '8080:80'
-      - '8443:443'
+      - '8443:8443'
       - '8822:22'
       - '5050:5050'
     volumes:

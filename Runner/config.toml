@@ -1,0 +1,10 @@
+concurrent = 1
+check_interval = 0
+
+[[runners]]
+  url = "https://gitlab.domain.local:8443"
+  clone_url = "https://gitlab.domain.local:8443"
+  executor = "docker"
+  [runners.docker]
+    helper_image = "gitlab/gitlab-runner-helper:ubuntu-x86_64-v14.10.2-pwsh"
+  [runners.cache]

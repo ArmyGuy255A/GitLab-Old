@@ -5,9 +5,12 @@ RUN chmod +x /usr/bin/dumb-init
 
 RUN apt-get update -y && \
     apt-get upgrade -y && \
-    apt-get install -y ca-certificates wget apt-transport-https vim nano && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y ca-certificates wget apt-transport-https vim nano curl software-properties-common 
+
+# RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
+#     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
+#     apt-get update -y && \
+#     apt-get install -y docker-ce
 
 RUN echo "deb https://packages.gitlab.com/runner/gitlab-ci-multi-runner/ubuntu/ `lsb_release -cs` main" > /etc/apt/sources.list.d/runner_gitlab-ci-multi-runner.list && \
     wget -q -O - https://packages.gitlab.com/gpg.key | apt-key add - && \
@@ -20,6 +23,8 @@ RUN echo "deb https://packages.gitlab.com/runner/gitlab-ci-multi-runner/ubuntu/ 
     chmod -R 700 /etc/gitlab-runner && \
     rm -rf /var/lib/apt/lists/*
 
+# ADD config.toml /etc/gitlab-runner/config.toml
+
 ADD entrypoint /
 RUN chmod +x /entrypoint
 
@@ -27,15 +32,9 @@ ADD certificates/ca.crt /etc/gitlab-runner/certs
 ADD certificates/gitlab.domain.local.crt /etc/gitlab-runner/certs
 
 VOLUME ["/etc/gitlab-runner", "/home/gitlab-runner"]
+
+# CMD ["printenv"]
+
 ENTRYPOINT ["/usr/bin/dumb-init", "/entrypoint"]
 
 CMD ["run", "--user=gitlab-runner", "--working-directory=/home/gitlab-runner"]
-
-# ADD . /entrypoint
-# RUN chown gitlab-runner /entrypoint
-# RUN chmod -R 700 /entrypoint
-
-# ENTRYPOINT ["/bin/bash", "/home/gitlab-runner"]
-# CMD ["run", "--user=root", "--working-directory=/home/gitlab-runner"]
-
-# CMD ["ls", "."]
