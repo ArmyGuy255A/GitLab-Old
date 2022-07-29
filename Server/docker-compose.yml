@@ -1,0 +1,34 @@
+version: '3.6'
+services:
+  gitlab:
+    image: 'gitlab/gitlab-ee:latest'
+    restart: always
+    hostname: 'gitlab.domain.local'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        # Add any other gitlab.rb configuration here, each on its own line
+        external_url 'https://gitlab.domain.local'
+        gitlab_rails['gitlab_shell_ssh_port'] = 8822
+        gitlab_rails['initial_root_password'] = "password"
+        gitlab_rails['store_initial_root_password'] = true
+        registry_external_url 'https://gitlab.domain.local:5050'
+        gitlab_rails['registry_enabled'] = true
+    ports:
+      - '8080:80'
+      - '8443:443'
+      - '8822:22'
+      - '5050:5050'
+    volumes:
+      - gitlab-config:/etc/gitlab
+      - gitlab-logs:/var/log/gitlab
+      - gitlab-data:/var/opt/gitlab
+    networks:
+      - gitlab
+    shm_size: '256m'
+volumes:
+  docker-machine-config:
+  gitlab-config:
+  gitlab-logs:
+  gitlab-data:
+networks:
+  gitlab:

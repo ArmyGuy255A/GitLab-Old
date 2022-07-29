@@ -1,0 +1,27 @@
+version: '3.6'
+services:
+  gitlab-runner:
+    image: armyguy255a/gitlab-runner:latest
+    restart: "no"
+    environment:
+      - GIT_SSL_NO_VERIFY=1
+    depends_on:
+      - gitlab
+    volumes:
+      - gitlab-runner-config:/etc/gitlab-runner
+      - gitlab-runner-home:/home/gitlab-runner
+      # - /home/toor/GitLab/gitlab-runner-config:/etc/gitlab-runner
+      - gitlab-runner-sock:/var/run/docker.sock
+      - docker-machine-config:/root/.docker/machine
+    ports:
+      - 8093:8093
+    networks:
+      - gitlab
+volumes:
+  docker-machine-config:
+  gitlab-runner-config:
+  gitlab-runner-home:
+  gitlab-runner-user-config:
+  gitlab-runner-sock:
+networks:
+  gitlab:

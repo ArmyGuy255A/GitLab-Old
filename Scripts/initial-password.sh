@@ -1,0 +1,1 @@
+sudo cat /var/lib/docker/volumes/gitlab_gitlab-config/_data/initial_root_password
