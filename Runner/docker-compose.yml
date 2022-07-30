@@ -17,7 +17,6 @@ services:
       - 8093:8093
     networks:
       - gitlab
-    # command: ["register", "--non-interactive", "--url", "https://gitlab.domain.local:8443", "--registration-token", "jk9ArzYVovwD513pjFpv", "--executor", "docker" , "--docker-image", "ubuntu:latest", "--tag-list", "docker,aws", "--name", "runner-1"]
 volumes:
   docker-machine-config:
   gitlab-runner-config:

@@ -8,4 +8,4 @@ cp ../certificates/domain.local.crt certificates/ca.crt
 cp ../certificates/gitlab.crt certificates/gitlab.domain.local.crt
 
 #build the image
-docker build . -t armyguy255a/gitlab-runner:v1.$buildNumber -t armyguy255a/gitlab-runner:latest
+docker build . -t armyguy255a/gitlab-runner:v2.$buildNumber -t armyguy255a/gitlab-runner:latest
