@@ -19,16 +19,11 @@ services:
       - '8822:22'
       - '5050:5050'
     volumes:
-      - gitlab-config:/etc/gitlab
-      - gitlab-logs:/var/log/gitlab
-      - gitlab-data:/var/opt/gitlab
+      - ./volumes/config:/etc/gitlab
+      - ./volumes/logs:/var/log/gitlab
+      - ./volumes/data:/var/opt/gitlab
     networks:
       - gitlab
     shm_size: '256m'
-volumes:
-  docker-machine-config:
-  gitlab-config:
-  gitlab-logs:
-  gitlab-data:
 networks:
   gitlab:

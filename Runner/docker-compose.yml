@@ -5,23 +5,17 @@ services:
     restart: "no"
     environment:
       - GIT_SSL_NO_VERIFY=1
-      - GIT_SSH_COMMAND="ssh -oPort=8443"
+      # - GIT_SSH_COMMAND="ssh -oPort=8443"
     depends_on:
       - gitlab
     volumes:
-      - gitlab-runner-config:/etc/gitlab-runner
-      - gitlab-runner-home:/home/gitlab-runner
+      - ./volumes/config:/etc/gitlab-runner
+      - ./volumes/home:/home/gitlab-runner
       - /var/run/docker.sock:/var/run/docker.sock
-      - docker-machine-config:/root/.docker/machine
+      - ./volumes/.docker/machine:/root/.docker/machine
     ports:
       - 8093:8093
     networks:
       - gitlab
-volumes:
-  docker-machine-config:
-  gitlab-runner-config:
-  gitlab-runner-home:
-  gitlab-runner-user-config:
-  gitlab-runner-sock:
 networks:
   gitlab:

@@ -1,5 +1,5 @@
 domain="domain.local"
-localCertDir="/home/toor/GitLab/certificates"
+localCertDir="./certificates"
 
 mkdir $localCertDir
 

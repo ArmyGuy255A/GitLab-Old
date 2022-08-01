@@ -7,11 +7,6 @@ RUN apt-get update -y && \
     apt-get upgrade -y && \
     apt-get install -y ca-certificates wget apt-transport-https vim nano curl software-properties-common 
 
-# RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
-#     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
-#     apt-get update -y && \
-#     apt-get install -y docker-ce
-
 RUN echo "deb https://packages.gitlab.com/runner/gitlab-ci-multi-runner/ubuntu/ `lsb_release -cs` main" > /etc/apt/sources.list.d/runner_gitlab-ci-multi-runner.list && \
     wget -q -O - https://packages.gitlab.com/gpg.key | apt-key add - && \
     apt-get update -y && \
@@ -28,8 +23,8 @@ RUN echo "deb https://packages.gitlab.com/runner/gitlab-ci-multi-runner/ubuntu/ 
 ADD entrypoint /
 RUN chmod +x /entrypoint
 
-ADD certificates/ca.crt /etc/gitlab-runner/certs
-ADD certificates/gitlab.domain.local.crt /etc/gitlab-runner/certs
+# ADD certificates/ca.crt /etc/gitlab-runner/certs
+# ADD certificates/gitlab.domain.local.crt /etc/gitlab-runner/certs
 
 VOLUME ["/etc/gitlab-runner", "/home/gitlab-runner"]
 
