@@ -5,7 +5,7 @@ RUN chmod +x /usr/bin/dumb-init
 
 RUN apt-get update -y && \
     apt-get upgrade -y && \
-    apt-get install -y ca-certificates wget apt-transport-https vim nano curl software-properties-common 
+    apt-get install -y ca-certificates wget apt-transport-https vim nano curl software-properties-common zip unzip
 
 RUN echo "deb https://packages.gitlab.com/runner/gitlab-ci-multi-runner/ubuntu/ `lsb_release -cs` main" > /etc/apt/sources.list.d/runner_gitlab-ci-multi-runner.list && \
     wget -q -O - https://packages.gitlab.com/gpg.key | apt-key add - && \
@@ -17,6 +17,11 @@ RUN echo "deb https://packages.gitlab.com/runner/gitlab-ci-multi-runner/ubuntu/ 
     mkdir -p /etc/gitlab-runner/certs && \
     chmod -R 700 /etc/gitlab-runner && \
     rm -rf /var/lib/apt/lists/*
+
+ADD vault_1.11.1_linux_amd64.zip /tmp/vault.zip
+
+RUN unzip /tmp/vault.zip -d /bin && \
+    rm /tmp/vault.zip
 
 # ADD config.toml /etc/gitlab-runner/config.toml
 
