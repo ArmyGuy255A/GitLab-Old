@@ -27,9 +27,9 @@ done
 cp $localCertDir/$gitlabFQDN.crt $gitlabCertPath/$gitlabFQDN.crt
 cp $localCertDir/$gitlabFQDN.key $gitlabCertPath/$gitlabFQDN.key
 
-#copy the new certs to the GitLab Server
-cp $localCertDir/$gitlabFQDN.crt $gitlabCertPath/$gitlabFQDN.crt
-cp $localCertDir/$gitlabFQDN.key $gitlabCertPath/$gitlabFQDN.key
+#copy the new certs to the Vault Server
+cp $localCertDir/$vaultFQDN.crt $vaultCertPath/$vaultFQDN.crt
+cp $localCertDir/$vaultFQDN.key $vaultCertPath/$vaultFQDN.key
 
 
 # #Restart the server
